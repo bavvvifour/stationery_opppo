@@ -1,30 +1,65 @@
+/**
+ * Базовый класс канцелярской принадлежности.
+ */
 public abstract class Stationery {
-    private double price;
-    private String ownerPhone;
+    /** Цена принадлежности. */
+    private final double price;
 
-    public Stationery(double price, String ownerPhone) {
-        if (price < 0) {
-            throw new IllegalArgumentException("Цена не может быть отрицательной");
+    /** Телефон владельца. */
+    private final String ownerPhone;
+
+    /**
+     * Создаёт канцелярскую принадлежность.
+     *
+     * @param priceValue цена
+     * @param ownerPhoneValue телефон владельца
+     */
+    protected Stationery(
+            final double priceValue,
+            final String ownerPhoneValue) {
+        if (!Double.isFinite(priceValue) || priceValue < 0) {
+            throw new IllegalArgumentException(
+                    "Цена должна быть конечным неотрицательным числом");
+        }
+        if (ownerPhoneValue == null || ownerPhoneValue.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Номер телефона не может быть пустым");
         }
 
-        if (ownerPhone == null || ownerPhone.isEmpty()) {
-            throw new IllegalArgumentException("Номер телефона не может быть пустым");
-        }
-
-        this.price = price;
-        this.ownerPhone = ownerPhone;
+        price = priceValue;
+        ownerPhone = ownerPhoneValue;
     }
 
-    public double getPrice() {
+    /**
+     * Возвращает цену принадлежности.
+     *
+     * @return цена
+     */
+    public final double getPrice() {
         return price;
     }
 
-    public String getOwnerPhone() {
+    /**
+     * Возвращает телефон владельца.
+     *
+     * @return телефон владельца
+     */
+    public final String getOwnerPhone() {
         return ownerPhone;
     }
 
+    /**
+     * Возвращает тип принадлежности.
+     *
+     * @return строковый код типа
+     */
     public abstract String getType();
 
+    /**
+     * Возвращает текстовое представление принадлежности.
+     *
+     * @return описание принадлежности
+     */
     @Override
     public abstract String toString();
 }

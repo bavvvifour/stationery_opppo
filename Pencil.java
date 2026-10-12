@@ -1,47 +1,71 @@
-public class Pencil extends Stationery {
-    private int leadHardness;
-    private PencilColor color;
+/**
+ * Представляет карандаш.
+ */
+public final class Pencil extends Stationery {
+    /** Твёрдость грифеля. */
+    private final int leadHardness;
 
-    public Pencil(int leadHardness, PencilColor color,
-                  double price, String ownerPhone) {
+    /** Цвет карандаша. */
+    private final PencilColor color;
 
-        super(price, ownerPhone);
+    /**
+     * Создаёт карандаш.
+     *
+     * @param leadHardnessValue твёрдость грифеля
+     * @param colorValue цвет карандаша
+     * @param priceValue цена
+     * @param ownerPhoneValue телефон владельца
+     */
+    public Pencil(
+            final int leadHardnessValue,
+            final PencilColor colorValue,
+            final double priceValue,
+            final String ownerPhoneValue) {
+        super(priceValue, ownerPhoneValue);
 
-        if (leadHardness <= 0) {
+        if (leadHardnessValue <= 0) {
             throw new IllegalArgumentException(
-                    "Плотность грифеля должна быть положительной"
-            );
+                    "Твёрдость грифеля должна быть положительной");
+        }
+        if (colorValue == null) {
+            throw new IllegalArgumentException(
+                    "Цвет не может быть пустым");
         }
 
-        if (color == null) {
-            throw new IllegalArgumentException("Цвет не может быть пустым");
-        }
-
-        this.leadHardness = leadHardness;
-        this.color = color;
+        leadHardness = leadHardnessValue;
+        color = colorValue;
     }
 
+    /**
+     * Возвращает твёрдость грифеля.
+     *
+     * @return твёрдость грифеля
+     */
     public int getLeadHardness() {
         return leadHardness;
     }
 
+    /**
+     * Возвращает цвет карандаша.
+     *
+     * @return цвет карандаша
+     */
     public PencilColor getColor() {
         return color;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getType() {
         return "PENCIL";
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return String.format(
-                "Карандаш: плотность грифеля=%d, цвет=%s, цена=%.2f, телефон владельца=%s",
-                leadHardness,
-                color,
-                getPrice(),
-                getOwnerPhone()
-        );
+                "Карандаш: твёрдость грифеля=%d, цвет=%s, цена=%.2f, "
+                        + "телефон владельца=%s",
+                leadHardness, color, getPrice(), getOwnerPhone());
     }
 }
