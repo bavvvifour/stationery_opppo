@@ -14,6 +14,7 @@ public abstract class Stationery {
      * @param priceValue цена
      * @param ownerPhoneValue телефон владельца
      */
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
     protected Stationery(
             final double priceValue,
             final String ownerPhoneValue) {

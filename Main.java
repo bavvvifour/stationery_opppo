@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Запускает программу обработки команд для канцелярских принадлежностей.
@@ -53,7 +55,6 @@ public final class Main {
     private static final int REM_VALUE_INDEX = 3;
 
     private Main() {
-        // Утилитный класс не создаётся.
     }
 
     /**
@@ -64,8 +65,10 @@ public final class Main {
     public static void main(final String[] args) {
         final StationeryManager manager = new StationeryManager();
 
-        try (BufferedReader reader = new BufferedReader(
-                new FileReader(INPUT_FILE))) {
+        try (BufferedReader reader = Files.newBufferedReader(
+                Path.of(INPUT_FILE),
+                StandardCharsets.UTF_8)) {
+
             String line;
             int lineNumber = 0;
 
@@ -85,6 +88,7 @@ public final class Main {
                                     + exception.getMessage());
                 }
             }
+
         } catch (IOException exception) {
             System.out.println(
                     "Ошибка при чтении файла: " + exception.getMessage());
